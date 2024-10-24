@@ -119,29 +119,6 @@ def create_comment(request, post_id: int, payload: CreateCommentSchema):
 
     return {"comment_id": comment.id, "message": message}
 
-# @router.post("/{post_id}/comments/", auth=AuthBearer())
-# def create_comment(request, post_id: int, payload: CreateCommentSchema):
-#     user = request.auth
-    
-#     is_blocked = check_toxicity(payload.content)
-
-#     post = Post.objects.get(id=post_id)
-#     comment = Comment.objects.create(
-#         post=post, 
-#         content=payload.content,
-#         user=user,
-#         is_blocked=is_blocked
-#     )
-
-#     if is_blocked:
-#         message = "Ваш коментарий заблокирован из-за нецензурной лексики."
-#     else:
-#         message = "Ваш коментарий успешно размещен."
-
-#     return {"comment_id": comment.id,
-#             "message": message  
-#     }
-
 # Аналитика коментариев 
 @router.get("/comments-daily-breakdown/")
 def comments_daily_breakdown(request, params: CommentsAnalyticsParams = Query(...)):
